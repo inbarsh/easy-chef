@@ -1,0 +1,45 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-centered">
+          <h1 class="mt-5 mb-3">My Pantry</h1>
+        <form action="/addingredientsitem/" method = "post">{% csrf_token %}
+            <input type="text" name="content">
+            <input type="submit" value="Add To My Pantry">
+        </form>
+        <ul>
+            {% for i in all_items %}
+            <li>{{i.content}}
+                <form action="/deleteingredientsitem/{{i.id}}/" method = "post">{% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-centered mt-3">
+        <a href="../allrecipes/" class="btn btn-primary">All Recipes</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-centered mt-3">
+        <a href="../relevantrecipes/" class="btn btn-primary">Relevant Recipes</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-centered mt-3">
+        <a href="../equipment/" class="btn btn-primary">Equipment</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-centered mt-3">
+        <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
